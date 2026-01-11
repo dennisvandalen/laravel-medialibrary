@@ -39,7 +39,7 @@ class Conversion
     ) {
         $optimizerChain = OptimizerChainFactory::create(config('media-library.image_optimizers'));
 
-        $this->manipulations = new Manipulations();
+        $this->manipulations = new Manipulations;
         $this->manipulations->optimize($optimizerChain)->format('jpg');
 
         $this->fileNamer = app(config('media-library.file_namer'));
@@ -106,7 +106,7 @@ class Conversion
 
     public function withoutManipulations(): self
     {
-        $this->manipulations = new Manipulations();
+        $this->manipulations = new Manipulations;
 
         return $this;
     }
@@ -153,7 +153,7 @@ class Conversion
 
     public function shouldBePerformedOn(string $collectionName): bool
     {
-        //if no collections were specified, perform conversion on all collections
+        // if no collections were specified, perform conversion on all collections
         if (! count($this->performOnCollections)) {
             return true;
         }
